@@ -1,4 +1,4 @@
-import { getServerSession } from 'next-auth'
+import { getServerSession } from 'next-auth/next'
 import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import Link from 'next/link'
@@ -17,7 +17,6 @@ export default async function Dashboard() {
       <ul>
         {products.map(p => <li key={p.id}><Link href={`/product/${p.id}`}>{p.title}</Link> – ${Number(p.price).toFixed(2)}</li>)}
       </ul>
-      {/* @ts-expect-error Async Server Component */}
       <NewProductForm />
     </section>
   )

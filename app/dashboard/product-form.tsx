@@ -1,4 +1,4 @@
-import { getServerSession } from 'next-auth'
+import { getServerSession } from 'next-auth/next'
 import { auth } from '@/lib/auth'
 import NewProductFormClient from './product-form.client'
 

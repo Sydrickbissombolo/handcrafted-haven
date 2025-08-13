@@ -35,7 +35,6 @@ export default async function ProductPage({ params }: { params: { id: string }})
         ))}
       </ul>
 
-      {/* @ts-expect-error Async Server Component */}
       <ReviewForm productId={product.id} />
     </section>
   )
