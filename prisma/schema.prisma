@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  BUYER
+  SELLER
+  ADMIN
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  image     String?
+  password  String
+  role      Role     @default(BUYER)
+  bio       String?
+
+  products  Product[]
+  reviews   Review[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  price       Decimal  @db.Decimal(10,2)
+  imageUrl    String
+  category    String
+  seller      User     @relation(fields: [sellerId], references: [id])
+  sellerId    String
+  reviews     Review[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  rating    Int
+  comment   String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+
+  createdAt DateTime @default(now())
+}
