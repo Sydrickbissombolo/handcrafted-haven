@@ -1,6 +1,7 @@
 import Credentials from 'next-auth/providers/credentials'
 import { prisma } from '@/lib/prisma'
 import bcrypt from 'bcryptjs'
+import NextAuth from 'next-auth'
 
 export const auth = {
   session: { strategy: 'jwt' as const },
@@ -23,3 +24,7 @@ export const auth = {
     async session({ session, token }: any) { if (session.user) (session.user as any).role = token.role; return session; }
   }
 }
+
+// For API route handler (app/api/auth/[...nextauth]/route.ts)
+const handler = NextAuth(auth)
+export { handler }
