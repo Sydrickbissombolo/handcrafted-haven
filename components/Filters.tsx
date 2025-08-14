@@ -2,9 +2,9 @@
 export const dynamic = "force-dynamic"
 
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 
-export default function Filters() {
+function FiltersInner() {
   const router = useRouter()
   const params = useSearchParams()
 
@@ -21,11 +21,9 @@ export default function Filters() {
 
   const applyFilters = () => {
     const p = new URLSearchParams()
-
     if (query.trim()) p.set('q', query.trim())
     if (category) p.set('category', category)
     if (max && parseInt(max) > 0) p.set('max', max)
-
     router.push('/?' + p.toString())
   }
 
@@ -76,5 +74,14 @@ export default function Filters() {
         <button className="btn-secondary" onClick={resetFilters}>Reset</button>
       </div>
     </div>
+  )
+}
+
+// Wrap FiltersInner in Suspense for useSearchParams support
+export default function Filters() {
+  return (
+    <Suspense fallback={null}>
+      <FiltersInner />
+    </Suspense>
   )
 }

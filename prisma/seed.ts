@@ -40,7 +40,7 @@ async function main() {
         title: 'Hand-Carved Wooden Dolls',
         description: 'Great for kids and collectors alike.',
         price: 45.00,
-        imageUrl: 'https://unsplash.com/fr/photos/un-groupe-de-poupees-assises-sur-des-chaises-_taJQu2igaw',
+        imageUrl: 'https://images.unsplash.com/photo-1665593870750-74b94dcbc732?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjZ8fEhhbmRjcmFmdGVkfGVufDB8fDB8fHww',
         category: 'Home & Kitchen',
         sellerId: seller.id
       },
