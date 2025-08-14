@@ -1,6 +1,9 @@
 # Handcrafted Haven
 
-A ready-to-submit full‑stack Next.js app that meets the project requirements:
+Group Member:
+1. Sydrick Newton Bissombolo
+
+Project Requirements:
 
 - Seller profiles with authenticated dashboard
 - Product listings with images, descriptions, categories, pricing
@@ -11,7 +14,7 @@ A ready-to-submit full‑stack Next.js app that meets the project requirements:
 
 ## Quick Start (Local)
 
-1. **Install** dependencies:
+1. **Installing** dependencies:
    ```bash
    npm install
    ```
@@ -39,9 +42,10 @@ A ready-to-submit full‑stack Next.js app that meets the project requirements:
 2. Add **Environment Variables** in Vercel Project Settings:
    - `DATABASE_URL` (Postgres connection string, e.g., Neon)
    - `NEXTAUTH_SECRET` (long random string)
-   - `NEXTAUTH_URL` (your Vercel URL, e.g., `https://handcrafted-haven.vercel.app`)
+   - `NEXTAUTH_URL` `https://handcrafted-haven-indol-tau.vercel.app/`
 3. In Vercel, set **Build Command** to `npm run build` and **Install Command** to `npm install`.
-4. After first deploy, run `npx prisma db push` and `npm run prisma:seed` from a local terminal with your production `DATABASE_URL` to provision the DB.
+4. After first deploy, run `npx prisma db push` and `npm run prisma:seed` from a local terminal with the production
+`DATABASE_URL` to provision the DB.
 
 ## Accessibility & Quality
 
@@ -52,8 +56,5 @@ A ready-to-submit full‑stack Next.js app that meets the project requirements:
 
 ## Project Management
 
-See [`docs/PROJECT_BOARD.md`](docs/PROJECT_BOARD.md) for a GitHub Boards template and issue list.
+GitHub Project Board: https://github.com/users/Sydrickbissombolo/projects/4/views/1?layout_template=board
 
-## License
-
-MIT — for educational use.
