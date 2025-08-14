@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Stars from './Stars'
 
 export default function ProductCard({ product }: { product: any }) {
+  const reviews = product.reviews ?? []
   const avg = product.reviews.length ? product.reviews.reduce((a: number, r: any) => a + r.rating, 0) / product.reviews.length : 0
   return (
     <article className="card" role="listitem" aria-labelledby={`prod-${product.id}-title`}>

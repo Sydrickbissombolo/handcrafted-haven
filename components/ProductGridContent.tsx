@@ -31,9 +31,10 @@ export default async function ProductGridContent({
   }
 
   const products = await prisma.product.findMany({
-    where,
-    orderBy: { createdAt: "desc" },
-  });
+  where,
+  include: { reviews: true, seller: true },
+  orderBy: { createdAt: 'desc' },
+})
 
   if (!products.length) {
     return <p>No products match your filters.</p>;

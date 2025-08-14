@@ -37,10 +37,10 @@ async function main() {
   const products = await prisma.product.createMany({
     data: [
       {
-        title: 'Hand-Carved Wooden Bowl',
-        description: 'Sustainably sourced teak, food-safe finish.',
+        title: 'Hand-Carved Wooden Dolls',
+        description: 'Great for kids and collectors alike.',
         price: 45.00,
-        imageUrl: 'https://images.unsplash.com/photo-1540304801-6cf9f8d0d2ae?q=80&w=1200',
+        imageUrl: 'https://unsplash.com/fr/photos/un-groupe-de-poupees-assises-sur-des-chaises-_taJQu2igaw',
         category: 'Home & Kitchen',
         sellerId: seller.id
       },
