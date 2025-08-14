@@ -1,30 +1,49 @@
 export const dynamic = "force-dynamic";
-import { prisma } from '@/lib/prisma'
-import ProductCard from './ProductCard'
-import { headers } from 'next/headers'
 
-export default async function ProductGridContent() {
-  const h = headers()
-  const url = new URL(h.get('x-url') ?? 'http://localhost:3000/')
-  const q = url.searchParams.get('q') ?? undefined
-  const category = url.searchParams.get('category') ?? undefined
-  const max = url.searchParams.get('max') ? Number(url.searchParams.get('max')) : undefined
+import { prisma } from "@/lib/prisma";
+import ProductCard from "./ProductCard";
+
+interface SearchParams {
+  q?: string;
+  category?: string;
+  max?: string;
+}
+
+export default async function ProductGridContent({
+  searchParams,
+}: {
+  searchParams?: SearchParams;
+}) {
+  const where: any = {};
+
+  // Apply filters from query params
+  if (searchParams?.q) {
+    where.name = { contains: searchParams.q, mode: "insensitive" };
+  }
+  if (searchParams?.category) {
+    where.category = searchParams.category;
+  }
+  if (searchParams?.max) {
+    const maxPrice = parseFloat(searchParams.max);
+    if (!isNaN(maxPrice)) {
+      where.price = { lte: maxPrice };
+    }
+  }
 
   const products = await prisma.product.findMany({
-    where: {
-      AND: [
-        q ? { OR: [{ title: { contains: q, mode: 'insensitive' }}, { description: { contains: q, mode: 'insensitive' }}] } : {},
-        category ? { category } : {},
-        max ? { price: { lte: max } } : {}
-      ]
-    },
-    include: { reviews: true, seller: true },
-    orderBy: { createdAt: 'desc' }
-  })
+    where,
+    orderBy: { createdAt: "desc" },
+  });
+
+  if (!products.length) {
+    return <p>No products match your filters.</p>;
+  }
 
   return (
-    <div className="grid" role="list" aria-label="Products">
-      {products.map(p => <ProductCard key={p.id} product={p} />)}
+    <div className="product-grid">
+      {products.map((product) => (
+        <ProductCard key={product.id} product={product} />
+      ))}
     </div>
-  )
+  );
 }
