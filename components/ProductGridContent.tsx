@@ -1,5 +1,3 @@
-'use client'
-
 export const dynamic = "force-dynamic";
 import { prisma } from '@/lib/prisma'
 import ProductCard from './ProductCard'
@@ -12,7 +10,6 @@ export default async function ProductGridContent() {
   const category = url.searchParams.get('category') ?? undefined
   const max = url.searchParams.get('max') ? Number(url.searchParams.get('max')) : undefined
 
-  
   const products = await prisma.product.findMany({
     where: {
       AND: [
